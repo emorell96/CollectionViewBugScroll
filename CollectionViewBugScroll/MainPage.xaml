@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CollectionViewBugScroll"
+             x:Class="CollectionViewBugScroll.MainPage"
+             >
+
+
+    <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+              Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+        <Button Text="Load Items" Command="{Binding LoadCommand}" Grid.Row="0"/>
+
+        <CollectionView ItemsSource="{Binding Examples}"
+                            
+                            Grid.Row="1"
+                            IsGrouped="true"
+                            
+                            Margin="{OnPlatform Default='0,10,0,10', Android='0,1,0,1'}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                     Span="{OnPlatform Android=1, iOS=1, Default=4}"
+                                     VerticalItemSpacing="10"
+                                     HorizontalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="local:GroupedObversableCollection">
+                    <Grid HorizontalOptions="StartAndExpand"
+                                  VerticalOptions="StartAndExpand"
+                                  MinimumHeightRequest="{OnPlatform Default=80, Android=30}"
+                                  HeightRequest="{OnPlatform Default=80, Android=30}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Name}"
+                                   
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                   />
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:ExampleItem">
+                    <Grid HeightRequest="{OnPlatform Default=400, Android=250}">
+                        <!--<Grid.Behaviors>
+                                <mct:MultiValidationBehavior  />
+                            </Grid.Behaviors>-->
+                        <StackLayout>
+                            <Label Text="{Binding Name}"
+                                           LineBreakMode="WordWrap"
+                                           FontSize="Small"
+                                           FontAttributes="Bold"
+                                           Margin="{OnPlatform Default='0,10,0,10', Android='0,2,0,2'}"/>
+                            <!--<Switch IsToggled="{Binding TestBool, Mode=TwoWay}"/>
+                            <Switch IsToggled="{Binding TestBool, Mode=OneWay}"/>-->
+                            <Switch IsToggled="{Binding SecondExample.TestBool, Mode=TwoWay}"/>
+                            <Switch IsToggled="{Binding SecondExample.TestBool, Mode=OneWay}"/>
+                            <Label Text="{Binding SecondExample.TestBool}"/>
+                            <!--<StackLayout Orientation="{OnPlatform Android='Horizontal', Default='Vertical'}">
+                                    <Label Text="Enable" Margin="0,10,0,10" />
+                                    <Switch IsToggled="{Binding ModelOptions.IsEnabled}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="{OnPlatform Android='Horizontal', Default='Vertical'}">
+                                    <Label Text="Max Price:" Margin="0,10,0,10"/>
+                                    <Entry Keyboard="Numeric" IsTextPredictionEnabled="False" Text="{Binding ModelOptions.MaxPrice}" MinimumWidthRequest="100">
+                                        -->
+                            <!--<Entry.Behaviors>
+                                            <mct:NumericValidationBehavior Flags="ValidateOnValueChanged"
+                                                                       MaximumDecimalPlaces="2"
+                                                                       InvalidStyle="{StaticResource InvalidEntry}"
+                                                                       ValidStyle="{StaticResource ValidEntry}"
+                                            />
+                                        </Entry.Behaviors>-->
+                            <!--
+                                    </Entry>
+                                </StackLayout>
+                                <StackLayout Orientation="{OnPlatform Android='Horizontal', Default='Vertical'}">
+                                    <Label Text="Min Price:" Margin="0,10,0,10"/>
+                                    <Entry Text="{Binding ModelOptions.MinPrice}" Keyboard="Numeric" MinimumWidthRequest="100" >
+                                        <Entry.Behaviors>
+                                            -->
+                            <!--<mct:NumericValidationBehavior Flags="ValidateOnValueChanged"
+                                                                       MaximumDecimalPlaces="2"
+                                                                       InvalidStyle="{StaticResource InvalidEntry}"
+                                                                       ValidStyle="{StaticResource ValidEntry}"                                                                       
+                                            />-->
+                            <!--
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </StackLayout>
+                                <StackLayout Orientation="{OnPlatform Android='Vertical', Default='Vertical'}">
+                                    <Label Text="Action:" Margin="0,10,0,10" />
+                                    <Picker ItemDisplayBinding="{Binding Description}"
+                                        SelectedIndex="{Binding ModelOptions.NotificationAction, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
+                                        ItemsSource="{Binding BindingContext.NotificationActions, Source={x:Reference view}}"
+                                            />
+                                </StackLayout>-->
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
