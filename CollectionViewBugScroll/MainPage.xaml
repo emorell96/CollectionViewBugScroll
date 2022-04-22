@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CollectionViewBugScroll"
+             xmlns:views="clr-namespace:CollectionViewBugScroll.Views"
              x:Class="CollectionViewBugScroll.MainPage"
              >
 
@@ -9,8 +10,8 @@
     <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
               Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
         <Button Text="Load Items" Command="{Binding LoadCommand}" Grid.Row="0"/>
-
-        <CollectionView ItemsSource="{Binding Examples}"
+        <views:ModelOptionsView ItemSource="{Binding Examples}" Grid.Row="1"/>
+        <!--<CollectionView ItemsSource="{Binding Examples}"
                             
                             Grid.Row="1"
                             IsGrouped="true"
@@ -52,21 +53,21 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:ExampleItem">
                     <Grid HeightRequest="{OnPlatform Default=400, Android=250}">
-                        <!--<Grid.Behaviors>
+                        --><!--<Grid.Behaviors>
                                 <mct:MultiValidationBehavior  />
-                            </Grid.Behaviors>-->
+                            </Grid.Behaviors>--><!--
                         <StackLayout>
                             <Label Text="{Binding Name}"
                                            LineBreakMode="WordWrap"
                                            FontSize="Small"
                                            FontAttributes="Bold"
                                            Margin="{OnPlatform Default='0,10,0,10', Android='0,2,0,2'}"/>
-                            <!--<Switch IsToggled="{Binding TestBool, Mode=TwoWay}"/>
-                            <Switch IsToggled="{Binding TestBool, Mode=OneWay}"/>-->
+                            --><!--<Switch IsToggled="{Binding TestBool, Mode=TwoWay}"/>
+                            <Switch IsToggled="{Binding TestBool, Mode=OneWay}"/>--><!--
                             <Switch IsToggled="{Binding SecondExample.TestBool, Mode=TwoWay}"/>
                             <Switch IsToggled="{Binding SecondExample.TestBool, Mode=OneWay}"/>
                             <Label Text="{Binding SecondExample.TestBool}"/>
-                            <!--<StackLayout Orientation="{OnPlatform Android='Horizontal', Default='Vertical'}">
+                            --><!--<StackLayout Orientation="{OnPlatform Android='Horizontal', Default='Vertical'}">
                                     <Label Text="Enable" Margin="0,10,0,10" />
                                     <Switch IsToggled="{Binding ModelOptions.IsEnabled}"/>
                                 </StackLayout>
@@ -104,12 +105,13 @@
                                         SelectedIndex="{Binding ModelOptions.NotificationAction, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
                                         ItemsSource="{Binding BindingContext.NotificationActions, Source={x:Reference view}}"
                                             />
-                                </StackLayout>-->
+                                </StackLayout>--><!--
                         </StackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
+
 
     </Grid>
 </ContentPage>

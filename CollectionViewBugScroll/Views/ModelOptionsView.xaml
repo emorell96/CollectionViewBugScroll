@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CollectionViewBugScroll"
+             x:Class="CollectionViewBugScroll.Views.ModelOptionsView"
+             x:DataType="local:ExampleItem"
+             x:Name="view"
+             >
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{OnPlatform Android=40, Default=50}"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <CollectionView ItemsSource="{Binding ItemSource, Source={x:Reference view}}"
+                            
+                            Grid.Row="1"
+                            IsGrouped="true"
+                            
+                            Margin="{OnPlatform Default='0,10,0,10', Android='0,1,0,1'}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="{OnPlatform Android=1, iOS=1, Default=4}"
+                                     VerticalItemSpacing="10"
+                                     HorizontalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="local:GroupedObversableCollection">
+                        <Grid HorizontalOptions="StartAndExpand"
+                                  VerticalOptions="StartAndExpand"
+                                  MinimumHeightRequest="{OnPlatform Default=80, Android=30}"
+                                  HeightRequest="{OnPlatform Default=80, Android=30}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="0.8*"/>
+                                <RowDefinition Height="0.1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}"
+                                   
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                   />
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ExampleItem">
+                        <Grid HeightRequest="{OnPlatform Default=400, Android=250}">
+                            <StackLayout>
+                                <Label Text="{Binding Name}"
+                                           LineBreakMode="WordWrap"
+                                           FontSize="Small"
+                                           FontAttributes="Bold"
+                                           Margin="{OnPlatform Default='0,10,0,10', Android='0,2,0,2'}"/>
+                                <Switch IsToggled="{Binding SecondExample.TestBool, Mode=TwoWay}"/>
+                                <Switch IsToggled="{Binding SecondExample.TestBool, Mode=OneWay}"/>
+                                <Label Text="{Binding SecondExample.TestBool}"/>
+                               
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

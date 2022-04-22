@@ -7,7 +7,7 @@
        
              Title="AppShell"
              >
-    <TabBar>
+    <FlyoutItem>
         <Tab Title="Bugged"
              >
             <ShellContent Title="Bug please"
@@ -20,7 +20,7 @@
         <Tab Title="Less bugged">
             <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>
-    </TabBar>
+    </FlyoutItem>
     
     
     
